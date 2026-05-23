@@ -1,0 +1,922 @@
+/* إعدادات تصفير وتحديد الأنماط العامة */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* ده أهم سطر عشان الـ Padding ميبوظش العرض */
+}
+
+html {
+    scroll-behavior: smooth;
+}
+html, body {
+    max-width: 100%;
+    overflow-x: hidden; /* يمنع السكرول الجانبي نهائياً */
+}
+/* العناوين الكبيرة والمميزة */
+h1, h2, h3, .section-title {
+    font-family: 'Reem Kufi', sans-serif;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 20px;
+}
+
+/* العنوان الرئيسي في اللاندينج */
+
+
+/* عناوين الأقسام (مثل: مواقيت الصلاة، الأذكار) */
+
+/* باقي النصوص خليها زي ما هي */
+body, p, span, a {
+    font-family: 'Cairo', sans-serif;
+}
+:root {
+    --main-color: #5ebbdf;
+    --secondary-color: #2c3e50;
+    --text-color: #555;
+    --bg-color: #f9f9f9;
+    --card-bg: #ffffff;
+    --border-color: #eee;
+    --transition-speed: 0.3s;
+}
+
+/* ثيم الوضع الليلي (Dark Theme) */
+body.dark-theme {
+    --secondary-color: #ecf0f1;
+    --text-color: #bbb;
+    --bg-color: #121824;
+    --card-bg: #1c2434;
+    --border-color: #2c3e50;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--secondary-color);
+    transition: background var(--transition-speed), color var(--transition-speed);
+    overflow-x: hidden;
+}
+/* --- شاشة التحميل --- */
+#loader-wrapper {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #1c2434; /* نفس لون ثيم موقعك */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease, visibility 0.8s;
+}
+
+.loader-content { text-align: center; }
+
+.loader-logo {
+    width: 350px;
+    margin-bottom: 75px;
+    animation: pulseLogo 1.5s infinite ease-in-out;
+}
+
+.loader-bar {
+    width: 400px;
+    height: 3px;
+    background: rgba(255,255,255,0.1);
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.loader-bar::after {
+    content: '';
+    position: absolute;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--main-color);
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { left: -100%; }
+    50% { left: 0; }
+    100% { left: 100%; }
+}
+
+@keyframes pulseLogo {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+}
+
+/* --- أنيميشن دخول الموقع --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* حالة إخفاء اللودر */
+.loader-hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+.container { 
+    width: 90%; /* تم توسيع الحاوية قليلاً لتناسب التصميم الحديث */
+    margin: 0 auto; 
+}
+ul { list-style: none; }
+a { text-decoration: none; }
+
+/* شريط التنقل (Navbar) - محدث للهامبرغر الدائم */
+nav {
+    background-color: #1c2434;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    height: 80px;
+    top: 0;
+    right: 0;
+    z-index: 2000;
+}
+
+nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+nav .logo .logoImage {
+    width: 200px; 
+    height: auto;
+    margin-top: 5px;
+}
+
+/* قائمة التنقل الجانبية - تعمل في كل الأوضاع */
+nav .nav-links { 
+    position: fixed;
+    top: 0;
+    right: -100%; /* مخفية في البداية */
+    width: 300px;
+    height: 100vh;
+    background-color: var(--card-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+    transition: 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    z-index: 2050;
+}
+
+nav .nav-links.active {
+    right: 0;
+}
+
+nav .nav-links li { margin: 0; }
+nav .nav-links li a { 
+    color: var(--secondary-color); 
+    font-size: 20px;
+    font-weight: bold; 
+    transition: var(--transition-speed); 
+}
+nav .nav-links li a:hover, nav .nav-links li a.active { color: var(--main-color); }
+
+/* زر الهامبرغر المطور */
+.hamburger {
+    display: flex !important;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    z-index: 2100;
+    filter: none !important; /* يضمن عدم وجود blur على الأشرطة نفسها */
+}
+
+.hamburger span {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background-color: #ecf0f1;
+    border-radius: 3px;
+    transition: 0.3s ease-in-out;
+}
+
+/* حركة X للهامبرغر */
+.hamburger.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+/* طبقة التعتيم (Overlay) */
+
+
+.nav-controls { display: flex; align-items: center; gap: 20px; }
+.dark-mode-toggle { font-size: 22px; cursor: pointer; color: #ecf0f1; transition: var(--transition-speed); }
+.dark-mode-toggle:hover { color: var(--main-color); }
+
+/* العناوين والأزرار المشتركة */
+.section-title {
+    font-size: 36px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+/* حركة بسيطة: خط صغير تحت عنوان القسم */
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--main-color);
+    border-radius: 2px;
+}
+
+.main-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #1c2e38 0%, #2c3e50 50%, #445a6b 100%) !important;
+    
+    color: #ecf0f1 !important; /* لون نص فاتح مائل للرمادي ليناسب الأجواء */
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1) !important;
+    transition: var(--transition-speed);
+}
+.main-btn:hover {background: linear-gradient(135deg, #2c3e50 0%, #445a6b 100%) !important; color: #ffffff !important; transform: translateY(-2px); }
+
+/* قسم اللاندينج (Landing) */
+.landing { 
+    padding-top: 100px; 
+    min-height: 100vh; 
+    display: flex;
+    align-items: center;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('imgs/background.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.landing .container { display: flex; justify-content: space-between; align-items: center; gap: 40px; }
+.landing-text { flex: 1; }
+.landing-text h1 {
+    font-size: 52px; /* حجم كبير وفخم للكمبيوتر */
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.3); 
+    margin-bottom: 20px; line-height: 1.4; color: #ecf0f1; /* ظل خفيف يبرز جمال الخط */
+}
+.landing-text p { font-size: 18px; color: #bbb; line-height: 1.8; margin-bottom: 30px; }
+.landing-image { flex: 1; text-align: center; }
+.landing-image img { max-width: 100%; height: auto; animation: float 4s ease-in-out infinite; }
+
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+/* قسم التعريف بالقناة (About) */
+.about-section { padding: 80px 0; background-color: var(--card-bg); }
+.about-wrapper { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
+.about-box {
+    background: var(--bg-color); flex: 1; min-width: 280px; max-width: 500px;
+    padding: 35px 25px; border-radius: 10px; text-align: center;
+    border: 1px solid var(--border-color); transition: var(--transition-speed);
+}
+.about-box:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
+.about-icon { font-size: 40px; color: var(--main-color); margin-bottom: 15px; }
+.about-box h3 { font-size: 22px; margin-bottom: 12px; }
+.about-box p { color: var(--text-color); line-height: 1.8; font-size: 16px; }
+
+/* قسم مواقيت الصلاة (Prayer Times) */
+.pray-times { padding: 80px 0; }
+.cards-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 20px; }
+.card {
+    background-color: var(--card-bg); padding: 25px 10px; text-align: center;
+    border-radius: 8px; border-bottom: 3px solid transparent;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.01); transition: var(--transition-speed);
+}
+.card:hover { transform: translateY(-4px); border-bottom-color: var(--main-color); }
+.card h3 { font-size: 18px; margin-bottom: 10px; }
+.card span { font-size: 22px; font-weight: bold; color: var(--main-color); }
+
+/* --- قسم الأذكار (تعديل لفصل النوع) --- */
+.azkar-section { 
+    padding: 80px 0; 
+    background-color: var(--card-bg); 
+}
+
+/* حاوية اختيار نوع الذكر - منفصلة في الأعلى */
+/* --- قسم الأذكار (تعديل لفصل النوع) --- */
+.azkar-section { 
+    padding: 80px 0; 
+    background-color: var(--card-bg); 
+}
+
+/* حاوية اختيار نوع الذكر - منفصلة في الأعلى */
+.azkar-selector-wrapper {
+    text-align: center;
+    margin-bottom: 40px; /* مسافة واضحة قبل الصناديق */
+    width: 100%;
+}
+
+.azkar-select {
+    padding: 12px 25px;
+    font-family: 'Cairo', sans-serif;
+    border-radius: 8px;
+    border: 2px solid var(--main-color);
+    background: var(--bg-color);
+    color: var(--secondary-color);
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    transition: var(--transition-speed);
+}
+
+.azkar-wrapper { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 40px; 
+    justify-content: center; 
+    align-items: flex-start; /* محاذاة للأعلى */
+}
+
+.azkar-box-content { 
+    flex: 1; 
+    min-width: 300px; 
+    background: var(--bg-color); 
+    padding: 35px; 
+    border-radius: 12px; 
+    text-align: center; 
+    border: 1px solid var(--border-color); 
+}
+
+.azkar-box-content p { 
+    font-size: 22px; 
+    font-weight: bold; 
+    min-height: 120px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+.sub-btn { 
+    background: none; 
+    border: 1px solid var(--main-color); 
+    color: var(--main-color); 
+    padding: 8px 20px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-family: 'Cairo'; 
+    margin-top: 15px; 
+    transition: 0.2s; 
+}
+
+.sub-btn:hover { 
+    background: var(--main-color); 
+    color: #fff; 
+}
+
+/* --- السبحة --- */
+.tasbeeh-counter { 
+    flex: 1; 
+    min-width: 300px; 
+    text-align: center; 
+}
+
+.counter-display { 
+    width: 130px; 
+    height: 130px; 
+    line-height: 130px; 
+    background: var(--bg-color); 
+    border: 4px solid var(--main-color); 
+    border-radius: 50%; 
+    font-size: 40px; 
+    font-weight: bold; 
+    margin: 0 auto 15px; 
+    color: var(--main-color); 
+}
+
+.tasbeeh-btns { 
+    display: flex; 
+    justify-content: center; 
+    gap: 15px; 
+    margin-top: 15px; 
+}
+
+.reset-btn { 
+    background: #e74c3c; 
+    color: #fff; 
+    border: none; 
+    padding: 12px 20px; 
+    border-radius: 6px; 
+    cursor: pointer; 
+    font-family: 'Cairo'; 
+    font-weight: bold; 
+}
+
+/* --- قسم تحدي العادات (تعديل للعرض الكامل) --- */
+.tracker-section { 
+    padding: 80px 0; 
+    background: var(--bg-color); /* تمييز بسيط عن الأذكار */
+    text-align: center; /* يضمن توسيط النصوص تلقائياً داخل القسم */
+}
+
+/* --- تنسيقات التعريف المضافة حديثاً --- */
+.challenge-intro {
+    max-width: 600px;
+    margin: 0 auto 20px auto; /* تمركز في المنتصف مع ترك مسافة قبل الزر */
+    padding: 0 20px;
+}
+
+.challenge-badge {
+    background-color: rgba(39, 174, 96, 0.1); /* خلفية خفيفة مريحة للعين */
+    color: #27ae60;
+    padding: 10px 24px;       /* زيادة المساحة الداخلية لتناسب الخط الكبير */
+    border-radius: 25px;
+    font-size: 20px;          /* تم تكبير الخط من 14px إلى 20px ليصبح بارزاً */
+    font-weight: 800;          /* زيادة سماكة الخط ليعطي مظهراً قوياً */
+    display: inline-block;
+    margin-bottom: 20px;      /* مسافة إضافية بين الشارة والعنوان الذي يليها */
+    letter-spacing: 0.5px;
+}
+
+.challenge-intro h2 {
+    color: var(--secondary-color); /* لون داكن مريح للقراءة */
+    font-size: 26px;
+    margin-bottom: 12px;
+    font-weight: bold;
+}
+
+.challenge-intro p {
+    color: #bbb; /* لون رمادي أنيق للنصوص الطويلة */
+    font-size: 16px;
+    line-height: 1.8;
+}
+/* -------------------------------------- */
+
+/* تنسيق الحاوية لتوسيط الزر في النص تماماً */
+.download-section {
+    display: flex;
+    justify-content: center; /* التوسيط أفقياً */
+    align-items: center;     /* التوسيط عمودياً */
+    width: 100%;
+    margin: 30px auto;       /* ترك مسافة مناسبة فوق وتحت الزر */
+}
+
+/* زر التحميل الخاص بك */
+.btn-download {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.btn-download:hover {
+    background-color: #219150;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+}
+
+/* تأثيرات التلاشي للأذكار */
+.fade-out { opacity: 0; transform: translateY(-10px); transition: 0.3s ease-in-out; }
+.fade-in { opacity: 1; transform: translateY(0); transition: 0.3s ease-in-out; }
+
+/* قسم بوصلة القبلة */
+.qibla-section { padding: 80px 0; text-align: center; }
+.qibla-wrapper { background: var(--card-bg); max-width: 500px; margin: 0 auto; padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); }
+.compass { position: relative; width: 180px; height: 180px; border: 4px dashed var(--main-color); border-radius: 50%; margin: 0 auto 25px; display: flex; align-items: center; justify-content: center; }
+.compass-arrow { font-size: 45px; color: #e67e22; transition: transform 0.5s ease-out; }
+
+/* تحدي العادات */
+
+
+/* الفيديوهات */
+.videos-section { padding: 80px 0; }
+.videos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+.video-card { background: var(--card-bg); padding: 15px; border-radius: 10px; border: 1px solid var(--border-color); }
+.video-embed { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; margin-bottom: 15px; }
+.video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+/* ==========================================
+   8. قسم التواصل والقنوات (Contact Section)
+   ========================================== */
+   .contact-section {
+    padding: 100px 0;
+    background-color: var(--bg-color);
+}
+
+.contact-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    align-items: flex-start;
+}
+
+/* شبكة القنوات */
+.channels-grid {
+    flex: 1.5;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.channel-card {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    transition: var(--transition-speed);
+}
+
+.channel-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.channel-icon {
+    font-size: 45px;
+    color: var(--main-color);
+    margin-bottom: 20px;
+}
+
+.channel-card h3 {
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.channel-card p {
+    color: var(--text-color);
+    font-size: 15px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* معلومات التواصل */
+.contact-info {
+    flex: 1;
+    background: var(--card-bg);
+    padding: 40px;
+    border-radius: 15px;
+    border-right: 5px solid var(--main-color);
+}
+
+.contact-info h3 {
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+.contact-info p {
+    margin-bottom: 30px;
+    color: var(--text-color);
+}
+
+.contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 20px;
+    background: var(--bg-color);
+    border-radius: 8px;
+    color: var(--secondary-color);
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.contact-item i {
+    font-size: 20px;
+    color: var(--main-color);
+}
+
+.contact-item:hover {
+    background: var(--main-color);
+    color: white;
+}
+
+.contact-item:hover i {
+    color: white;
+}
+/* ==========================================
+   9. قسم الفيديوهات القصيرة (Reels)
+   ========================================== */
+   .reels-container {
+    margin-top: 60px;
+    padding: 0 15px;
+}
+
+.sub-section-title {
+    font-family: 'Reem Kufi', sans-serif;
+    font-size: 24px;
+    margin-bottom: 30px;
+    color: var(--main-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.reels-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.reel-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    transition: 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.reel-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.reel-embed {
+    position: relative;
+    padding-bottom: 177.77%; /* نسبة الـ 9:16 الطولية */
+    height: 0;
+    background: #000;
+}
+
+.reel-embed iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.reel-info {
+    padding: 15px;
+    text-align: center;
+}
+
+.reel-info p {
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+/* تنسيق صندوق وصف الفيديو */
+.video-info-box {
+    margin-top: 10px;
+    text-align: right; /* عشان الكلام عربي */
+    background: rgba(var(--main-color-rgb), 0.05); /* خلفية خفيفة جداً */
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.video-info-box details {
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.video-info-box summary {
+    list-style: none; /* إخفاء السهم الافتراضي للمتصفح */
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    color: var(--secondary-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    border-bottom: 1px solid transparent;
+}
+
+.video-info-box summary::-webkit-details-marker {
+    display: none; /* إخفاء السهم في متصفحات سافاري */
+}
+
+/* شكل السهم */
+.arrow-icon {
+    font-size: 12px;
+    transition: transform 0.3s ease;
+    color: var(--main-color);
+}
+
+/* حركة السهم عند الفتح */
+.video-info-box details[open] summary .arrow-icon {
+    transform: rotate(180deg);
+}
+
+.video-info-box details[open] summary {
+    border-bottom-color: var(--border-color);
+}
+
+/* محتوى الوصف */
+.video-info-box .content {
+    padding: 15px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-color);
+    background: var(--card-bg);
+    animation: slideDown 0.4s ease-out;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.reels-grid .video-info-box .content p {
+    font-size: 12px;
+}
+/* التجاوب للهواتف */
+
+
+/* تذييل الصفحة (Footer) - المحدث لصورتين */
+footer {
+    background: #111622;
+    color: #fff;
+    padding: 60px 0 30px;
+    text-align: center;
+}
+
+.footer-content { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+
+.footer-sponsor { display: flex; flex-direction: column; align-items: center; gap: 15px; }
+.footer-sponsor span { font-size: 14px; color: #999; letter-spacing: 1px; }
+
+.sponsor-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.footer-sponsor img {
+    max-width: 125px;
+    height: auto;
+    filter: brightness(0.8); 
+    opacity: 0.7;
+    transition: 0.3s;
+}
+.footer-sponsor img:hover { opacity: 1; filter: brightness(1); transform: scale(1.1); }
+
+.footer-line {
+    width: 200px;
+    border: 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin: 20px 0;
+}
+.copyrights { font-size: 14px; color: #bdc3c7; }
+
+/* الاستجابة للهواتف المحمولة */
+/* ==========================================
+   تحسينات التجاوب الشاملة (النسخة النهائية الموحدة)
+   ========================================== */
+
+/* 1. أجهزة التابلت (مثل iPad Air) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        width: 92%;
+    }
+    .landing-text h1 {
+        font-size: 35px;
+    }
+    .cards-container {
+        grid-template-columns: repeat(3, 1fr); /* 3 كروت في الصف */
+    }
+}
+/* 2. أجهزة الموبايل (الشاشات العادية 768px وأقل) */
+@media screen and (max-width: 768px) {
+    /* الهيدر والمنيو */
+    nav .logo .logoImage {
+        width: 140px; 
+    }
+    nav .nav-links { 
+        width: 80%; /* توازن بين 85% و 75% */
+    }
+
+    /* اللاندينج - ترتيب ذكي */
+    .landing {
+        padding-top: 100px;
+        text-align: center;
+    }
+    .landing .container {
+        flex-direction: column-reverse;
+        gap: 30px;
+    }
+    .landing-text h1 {
+        font-size: 28px;
+        line-height: 1.3;
+    }
+    .landing-text p {
+        font-size: 15px;
+    }
+    .landing-image img {
+        max-width: 220px;
+    }
+
+    /* مواقيت الصلاة - (2 في كل صف) */
+    .cards-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    .card {
+        padding: 15px 10px;
+    }
+    .card h3 { font-size: 15px; }
+    .card span { font-size: 18px; }
+
+    /* الأذكار والسبحة */
+    .azkar-wrapper {
+        flex-direction: column;
+        gap: 25px;
+    }
+    .azkar-box-content, 
+    .tasbeeh-counter {
+        width: 100%;
+        min-width: unset;
+    }
+
+    /* تحدي العادات */
+    .challenge-intro h2 {
+        font-size: 22px;
+    }
+    .btn-download {
+        width: 100%;
+        max-width: 300px; /* عشان ميبقاش عريض بزيادة في بعض الموبايلات */
+        margin: 0 auto;
+        font-size: 16px;
+    }
+
+    /* الفيديوهات */
+    .videos-grid {
+        grid-template-columns: 1fr; /* فيديو واحد في الصف */
+    }
+    
+    .quran-container { 
+        height: 400px; /* تقليل الارتفاع شوية للموبايل */
+    }
+    .contact-wrapper {
+        flex-direction: column;
+    }
+    
+    .channels-grid, .contact-info {
+        width: 100%;
+    }
+    
+    .contact-info {
+        border-right: none;
+        border-top: 5px solid var(--main-color);
+    }
+}
+
+/* 3. الشاشات الصغيرة جداً (iPhone 4 / SE / JioPhone) */
+@media screen and (max-width: 380px) {
+    .landing-text h1 {
+        font-size: 24px;
+    }
+    
+    .cards-container {
+        grid-template-columns: 1fr; /* كارت واحد في الصف لسهولة القراءة */
+    }
+
+    .counter-display {
+        width: 110px;
+        height: 110px;
+        line-height: 110px;
+        font-size: 32px;
+    }
+
+    nav .nav-links {
+        width: 100% !important; /* المنيو تملأ الشاشة */
+    }
+}
+@media screen and (max-width: 600px) {
+    .reels-grid {
+        grid-template-columns: repeat(2, 1fr); /* فيديوهين جنب بعض في الموبايل */
+        gap: 10px;
+    }
+    .reel-info p {
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>العالم الإسلامي</title>
+    <link rel="icon" href="imgs/logo-icon.jpg">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Reem+Kufi:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="loader-wrapper">
+        <div class="loader-content">
+            <img src="imgs/logo-center.png" alt="Logo" class="loader-logo">
+            <div class="loader-bar"></div>
+        </div>
+    </div>
+
+    <header>
+        <nav>
+            <div class="container">
+                <div class="logo">
+                    <img src="imgs/logo-header.png" class="logoImage" alt="Logo">
+                </div>
+                
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#landing" class="active">الرئيسية</a></li>
+                    <li><a href="#about">التعريف بالقناة</a></li>
+                    <li><a href="#pray">المواقيت</a></li>
+                    <li><a href="#azkar">الأذكار والسبحة</a></li>
+                    <li><a href="#qibla">اتجاه القبلة</a></li>
+                    <li><a href="#tracker">تحدي العادات</a></li>
+                    <li><a href="#videos">الفيديوهات</a></li>
+                    <li><a href="#contact">تواصل معنا</a></li>
+                </ul>
+
+                <div class="nav-controls">
+                    <div id="darkModeBtn" class="dark-mode-toggle"><i class="fa-solid fa-moon"></i></div>
+                    
+                    <div class="hamburger" id="menuIcon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="landing" id="landing">
+        <div class="container">
+            <div class="landing-text">
+                <h1>منصتك الإسلامية الرقمية</h1>
+                <p>مرحباً بك في موقعنا الشامل. نرافقك طوال يومك بمواقيت صلاة دقيقة، مصحف شامل، وسبحة ذكية تحفظ أورادك، مع أدوات تفاعلية لبناء عاداتك الإيمانية.</p>
+                <a href="#about" class="main-btn">اكتشف القناة والموقع</a>
+            </div>
+            <div class="landing-image">
+                <img src="imgs/logo-center.png" alt="Islamic Illustration">
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section reveal" id="about">
+        <div class="container">
+            <h2 class="section-title">التعريف بالقناة والموقع</h2>
+            <div class="about-wrapper">
+                <div class="about-box">
+                    <div class="about-icon"><i class="fa-solid fa-mosque"></i></div>
+                    <h3>رؤيتنا</h3>
+                    <p>تقديم محتوى إسلامي هادف ومبسط يدمج بين السيرة النبوية العطرة، الفقه الميسر، وتطوير الذات من منظور إيماني معاصر.</p>
+                </div>
+                <div class="about-box">
+                    <div class="about-icon"><i class="fa-brands fa-youtube"></i></div>
+                    <h3>رسالة القناة</h3>
+                    <p>نهدف لتمكين المسلم من ممارسة عباداته اليومية وتطوير معلوماته الدينية بأسلوب بصري جذاب ممتع عبر منصاتنا التفاعلية.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="pray-times reveal" id="pray">
+        <div class="container">
+            <h2 class="section-title">مواقيت الصلاة اليوم</h2>
+            <div class="cards-container">
+                <div class="card"><h3>الفجر</h3><span id="fajr">--:--</span></div>
+                <div class="card"><h3>الشروق</h3><span id="shooruq">--:--</span></div>
+                <div class="card"><h3>الظهر</h3><span id="dhuhr">--:--</span></div>
+                <div class="card"><h3>العصر</h3><span id="asr">--:--</span></div>
+                <div class="card"><h3>المغرب</h3><span id="maghrib">--:--</span></div>
+                <div class="card"><h3>العشاء</h3><span id="isha">--:--</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="azkar-section reveal" id="azkar">
+        <div class="container">
+            <h2 class="section-title">حصن المسلم والسبحة</h2>
+            
+            <div class="azkar-selector-wrapper">
+                <label for="azkarCategory" style="display:block; margin-bottom:10px; font-weight:bold;">اختر الفئة:</label>
+                <select id="azkarCategory" class="azkar-select">
+                    <option value="tasbeeh">تسبيح عام</option>
+                    <option value="morning">أذكار الصباح</option>
+                    <option value="evening">أذكار المساء</option>
+                    <option value="sleep">أذكار النوم</option>
+                    <option value="distress">أذكار الكرب</option>
+                </select>
+            </div>
+    
+            <div class="azkar-wrapper">
+                <div class="azkar-box-content">
+                    <p id="currentAzkar">"سُبْحَانَ اللَّهِ وَبِحَمْدِهِ"</p>
+                    <div class="azkar-controls">
+                        <button class="sub-btn" id="prevAzkarBtn"><i class="fa-solid fa-arrow-right"></i> السابق</button>
+                        <button class="sub-btn" id="nextAzkarBtn">التالي <i class="fa-solid fa-arrow-left"></i></button>
+                    </div>
+                </div>
+                
+                <div class="tasbeeh-counter">
+                    <div class="counter-display" id="counterNum">0</div>
+                    <p>إجمالي اليوم: <span id="totalTasbeeh">0</span></p>
+                    <div class="tasbeeh-btns">
+                        <button class="main-btn" id="countBtn">اضغط للتسبيح</button>
+                        <button class="reset-btn" id="resetBtn">تصفير</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+<!-- قسم التعريف بالتحدي وزر التحميل -->
+<section class="tracker-section reveal">
+    <!-- حاوية التعريف بالتحدي -->
+    <div class="challenge-intro">
+        <span class="challenge-badge">تحدي الـ 30 يومًا 🎯</span>
+        <h2 class="section-title">ابدأ رحلة التغيير والالتزام اليوم!</h2>
+        <p>
+            هذا التحدي مصمم خصيصاً لمساعدتك على بناء عادات إيجابية مستدامة خطوة بخطوة. 
+            كل يوم يمثل فرصة جديدة للتقدم والنمو. قم بتحميل الجدول الكامل والجاهز للطباعة 
+            لتتبع إنجازك اليومي بنفسك وبكل سهولة.
+        </p>
+    </div>
+
+    <!-- حاوية التوسيط مع زر التحميل المباشر المتناسق مع كودك -->
+    <div class="download-section">
+        <a href="YOUR_FILE_NAME.pdf" download="تحدي_الـ30_يوم.pdf" class="btn-download">
+            📥 تحميل جدول التحدي (PDF)
+        </a>
+    </div>
+</section>
+
+    <section class="qibla-section reveal" id="qibla">
+        <div class="container">
+            <h2 class="section-title">محدد اتجاه القبلة</h2>
+            <div class="qibla-wrapper">
+                <p class="qibla-hint">حرك الجهاز باتجاه السهم لتحديد اتجاه مكة المكرمة</p>
+                <div class="compass">
+                    <div class="compass-arrow" id="compassArrow">
+                        <i class="fa-solid fa-location-arrow"></i>
+                    </div>
+                    <div class="kaaba-icon">🕋</div>
+                </div>
+                <div id="qiblaDegrees" class="qibla-result">زاوية القبلة: --°</div>
+                <button class="main-btn" id="getQiblaBtn"><i class="fa-solid fa-compass"></i> حدد موقعي والقبلة</button>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="videos-section reveal" id="videos">
+        <div class="container">
+            <h2 class="section-title">أحدث فيديوهات القناة</h2>
+            <div class="videos-grid" id="main-videos-container"></div>
+        </div>
+    
+        <div class="reels-container reveal">
+            <h3 class="sub-section-title"><i class="fa-solid fa-bolt"></i> فيديوهات قصيرة (Reels)</h3>
+            <div class="reels-grid" id="reels-container"></div>
+        </div>
+    </section>
+    <section id="contact" class="contact-section reveal">
+        <div class="container">
+            <h2 class="section-title">قنواتنا وتواصل معنا</h2>
+            
+            <div class="contact-wrapper">
+                <div class="channels-grid">
+                    <div class="channel-card">
+                        <i class="fa-brands fa-youtube channel-icon"></i>
+                        <h3>يوتيوب</h3>
+                        <p>تابع شروحاتنا وتحدياتنا اليومية على القناة الرسمية.</p>
+                        <a href="#" class="sub-btn">اشترك الآن</a>
+                    </div>
+                    
+                    <div class="channel-card">
+                        <i class="fa-brands fa-tiktok channel-icon"></i>
+                        <h3>تيكتوك</h3>
+                        <p>احصل على الملفات والمصادر الخاصة بتحدي الـ 30 يوم.</p>
+                        <a href="#" class="sub-btn">انضم للمجموعة</a>
+                    </div>
+                </div>
+    
+                <div class="contact-info">
+                    <h3>هل لديك استفسار؟</h3>
+                    <p>نحن نسعد دائماً بسماع آرائكم واقتراحاتكم لتطوير المحتوى.</p>
+                    
+                    <div class="contact-methods">
+                        <a href="ayoutube235@gmail.com" class="contact-item">
+                            <i class="fa-solid fa-envelope"></i>
+                            <span>البريد الإلكتروني</span>
+                        </a>
+                        <a href="https://wa.me/yournumber" class="contact-item">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <span>واتساب</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-sponsor">
+                    <span>برعاية</span>
+                    <div class="sponsor-logos">
+                        <img src="imgs/the-ux-logo.png" alt="Sponsor 1">
+                        <img src="imgs/sponsor2.png" alt="Sponsor 2">
+                    </div>
+                </div>
+                <hr class="footer-line">
+                <p class="copyrights">
+                    جميع الحقوق محفوظة &copy; 2026 | العالم الإسلامي
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <audio id="welcomesound" preload="auto">
+        <source src="sounds/website-sound.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
+    <!-- مكتبة توليد الـ PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</body>
+</html>
